@@ -71,8 +71,7 @@ def search_golden_cookie():
         pyautogui.moveTo(pos[0] + width / 2, pos[1] + height / 2, 0)
         pyautogui.click(button="left")
         return True
-    else:
-        return False
+    return False
 
 def start_tui():
     print("##################################################")
