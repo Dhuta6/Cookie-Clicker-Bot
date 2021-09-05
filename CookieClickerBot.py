@@ -81,7 +81,7 @@ def start_tui():
     print("###########                            ###########")
     print("##################################################\n\n")
     print("This Bot is automated to click on the Cookie and Golden Cookies. It will make use of your mouse, so once the bot is running head to the Cookie Clicker game and AFK since you're PC will be occupied.\n")
-    print("- Terminating script: If you're on Windows, try holding 'q' to quit. If you're on Linux, good luck")
+    print("- Terminating script: If you're on Windows, try holding 'q' to quit. If you're on Linux, you may find a way to succeed.")
     print("[*] It seems you're using Windows, so terminating with key press should work as intended" if os.name == "nt" else "[*] It seems you're on a UNIX based system, you so might encounter it a bit hard to quit.\n")
     print("- Arguments: The following arguments are available")
     print("    --slow: It will comsume less resources from your PC, but it'll click slower (3 clicks/s)")
