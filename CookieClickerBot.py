@@ -13,7 +13,6 @@ from PIL import Image
 import io
 
 screenshot = None
-threads = []
 elements = {}
 
 def get_raw_image(image):
@@ -31,25 +30,17 @@ def set_interval(func, time):
 def decode_image(raw_img):
     return np.array(Image.open(io.BytesIO(base64.b64decode(raw_img))))
 
-def image_search(template, precision, mode="normal"):
+def image_search(template, precision):
     with mss.mss() as sct:
         img = screenshot
         img_rgb = np.array(img)
         img_gray = cv2.cvtColor(img_rgb, cv2.COLOR_BGR2GRAY)
         template.shape[::-1]
-
-        if mode == "color":
-            res = cv2.matchTemplate(img_gray, template,cv2.TM_CCORR_NORMED)
-            min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
-            if max_val < precision:
-                return [-1, -1]
-            return max_loc
-        else:
-            res = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED)
-            min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
-            if max_val < precision:
-                return [-1, -1]
-            return max_loc
+        res = cv2.matchTemplate(img_gray, template, cv2.TM_CCOEFF_NORMED)
+        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
+        if max_val < precision:
+            return [-1, -1]
+        return max_loc
 
 def set_element(elem):
     global elements
@@ -125,17 +116,13 @@ def handle_args(argv):
     slow = False
 
     print("Handling arguments...")
-    
     for arg in argv:
         if arg == "--slow":
             print("[*] Detected --slow")
             slow = True
-
     if not slow:
         print("No arguments encountered")
-
     print("Searching for cookies to click...")
-
     return slow
 
 
